@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head><!-- ═══ Google Analytics 4 ═══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZD0KFFHV1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // Configuration principale GA4
+  gtag('config', 'G-2ZD0KFFHV1', {
+    page_title: document.title,
+    page_location: window.location.href
+  });
+
+  // ── Tracking des clics sur les boutons email (UTM) ──
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Bouton "Analyse gratuite" venant de l'email
+    document.querySelectorAll('a[href*="cta_analyse"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        gtag('event', 'clic_cta_analyse', {
+          event_category: 'Email Campaign',
+          event_label: 'Lemoine 2026 — Analyse gratuite',
+          campaign: 'lemoine2026'
+        });
+      });
+    });
+
+    // Bouton "Simuler mes économies" venant de l'email
+    document.querySelectorAll('a[href*="cta_simulation"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        gtag('event', 'clic_cta_simulation', {
+          event_category: 'Email Campaign',
+          event_label: 'Lemoine 2026 — Simulation',
+          campaign: 'lemoine2026'
+        });
+      });
+    });
+
+    // Soumission du formulaire de contact
+    var formContact = document.querySelector('#contact form, form[id*="contact"]');
+    if (formContact) {
+      formContact.addEventListener('submit', function() {
+        gtag('event', 'formulaire_contact_soumis', {
+          event_category: 'Lead',
+          event_label: 'Formulaire contact MWG'
+        });
+      });
+    }
+
+  });
+</script>
+<!-- ═══ Fin Google Analytics 4 ═══ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
